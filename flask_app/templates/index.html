@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monte Carlo Option Pricing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Monte Carlo Option Pricing</h1>
+
+    <form method="POST">
+        <label>Initial Price (S0)</label>
+        <input type="text" name="S0" value="100">
+
+        <label>Strike Price (K)</label>
+        <input type="text" name="K" value="105">
+
+        <label>Volatility (σ)</label>
+        <input type="text" name="sigma" value="0.2">
+
+        <label>Risk-Free Rate (r)</label>
+        <input type="text" name="r" value="0.05">
+
+        <label>Maturity (T, years)</label>
+        <input type="text" name="T" value="1">
+
+        <label>Number of Simulations</label>
+        <input type="text" name="n_sim" value="20000">
+
+        <label>Time Steps (only for Asian)</label>
+        <input type="text" name="n_steps" value="252">
+
+        <label>Option Type</label>
+        <select name="option_type">
+            <option value="european">European Call</option>
+            <option value="asian">Asian Call</option>
+        </select>
+
+        <button type="submit">Run Simulation</button>
+    </form>
+
+    {% if price %}
+        <p><strong>Option Price:</strong> {{ price }}</p>
+    {% endif %}
+
+    {% if img_data %}
+        <img src="data:image/png;base64,{{ img_data }}" />
+    {% endif %}
+</body>
+</html>
